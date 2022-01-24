@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9211543279ED2E100746454 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9211542279ED2E100746454 /* Puzzle.swift */; };
 		D98D8752279B051C002FFCEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8751279B051C002FFCEC /* AppDelegate.swift */; };
 		D98D8754279B051C002FFCEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8753279B051C002FFCEC /* SceneDelegate.swift */; };
 		D98D8756279B051C002FFCEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8755279B051C002FFCEC /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 		D98D8769279B051E002FFCEC /* PuzzleGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8768279B051E002FFCEC /* PuzzleGameTests.swift */; };
 		D98D8773279B051E002FFCEC /* PuzzleGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8772279B051E002FFCEC /* PuzzleGameUITests.swift */; };
 		D98D8775279B051E002FFCEC /* PuzzleGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8774279B051E002FFCEC /* PuzzleGameUITestsLaunchTests.swift */; };
+		D9FECE0F279B335300603AFE /* PuzzleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FECE0E279B335300603AFE /* PuzzleImage.swift */; };
+		D9FECE11279B347600603AFE /* URLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FECE10279B347600603AFE /* URLStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D9211542279ED2E100746454 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		D98D874E279B051C002FFCEC /* PuzzleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98D8751279B051C002FFCEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D98D8753279B051C002FFCEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		D98D876E279B051E002FFCEC /* PuzzleGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuzzleGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98D8772279B051E002FFCEC /* PuzzleGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameUITests.swift; sourceTree = "<group>"; };
 		D98D8774279B051E002FFCEC /* PuzzleGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D9FECE0E279B335300603AFE /* PuzzleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleImage.swift; sourceTree = "<group>"; };
+		D9FECE10279B347600603AFE /* URLStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,9 @@
 		D9FECE0B279B2FE900603AFE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D9FECE0E279B335300603AFE /* PuzzleImage.swift */,
+				D9FECE10279B347600603AFE /* URLStrings.swift */,
+				D9211542279ED2E100746454 /* Puzzle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,7 +291,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9FECE11279B347600603AFE /* URLStrings.swift in Sources */,
 				D98D8756279B051C002FFCEC /* ViewController.swift in Sources */,
+				D9FECE0F279B335300603AFE /* PuzzleImage.swift in Sources */,
+				D9211543279ED2E100746454 /* Puzzle.swift in Sources */,
 				D98D8752279B051C002FFCEC /* AppDelegate.swift in Sources */,
 				D98D8754279B051C002FFCEC /* SceneDelegate.swift in Sources */,
 			);
