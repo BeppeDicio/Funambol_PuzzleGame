@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     var gameNumber = 0
     var gameTimer: Timer?
     
+    let imagePicker = UIImagePickerController()
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -27,10 +29,13 @@ class HomeViewController: UIViewController {
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
         
+        imagePicker.delegate = self
+        
         addNewPuzzle()
     }
     
     func addNewPuzzle(){
+        
         let imageURL = NSURL(string: urlSrtings.random1024ImagesURL)
         let imagedData = NSData(contentsOf: imageURL! as URL)!
         let image = UIImage(data: imagedData as Data)
@@ -41,16 +46,30 @@ class HomeViewController: UIViewController {
         }
         
         puzzleHintButton.isEnabled = true
+        collectionView.reloadData()
     }
     
-    @IBAction func newRandomPuzzle(_ sender: UIButton) {
-        addNewPuzzle()
+    func addNewPuzzle(image: UIImage){
+        
+        if image != nil {
+            let solvedImages = utility.divide(times: gameSettings.gridColums, image: image)
+            puzzleList.append(Puzzle(image: image, solvedImages: solvedImages))
+        }
+        
+        puzzleHintButton.isEnabled = true
         gameNumber += 1
         collectionView.reloadData()
     }
     
+    @IBAction func newRandomPuzzle(_ sender: UIButton) {
+        
+        gameNumber += 1
+        addNewPuzzle()
+    }
+    
     @IBOutlet weak var puzzleHintButton: UIButton!
     @IBAction func puzzleHint(_ sender: UIButton) {
+        
         hintImage.image = self.puzzleList[gameNumber].image
         hintImage.backgroundColor = .white
         hintImage.contentMode = .scaleAspectFit
@@ -61,11 +80,29 @@ class HomeViewController: UIViewController {
         gameTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(removeHintImage), userInfo: nil, repeats: false)
     }
     
+    @IBAction func newPuzzleFromLibrary(_ sender: UIButton) {
+        
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     @objc func removeHintImage() {
         self.view.sendSubviewToBack(hintImage)
         self.collectionView.isHidden = false
         self.hintImage.removeFromSuperview()
         puzzleHintButton.isEnabled = false
+    }
+}
+
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage {
+            addNewPuzzle(image: image)
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 
