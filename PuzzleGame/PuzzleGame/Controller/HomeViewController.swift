@@ -12,34 +12,36 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     let urlSrtings = URLStrings()
     let utility = Utility()
     var puzzleList = [Puzzle]()
+    let gameSettings = GameSettings()
+    var gameNumber = 0
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addNewPuzzle()
+    }
+    
+    func addNewPuzzle(){
         let imageURL = NSURL(string: urlSrtings.random1024ImagesURL)
         let imagedData = NSData(contentsOf: imageURL! as URL)!
         let image = UIImage(data: imagedData as Data)
         
         if image != nil {
-            let ciImage = CIImage(image: image!)!
-            let cgImage = utility.convertCIImageToCGImage(ciImage)!
-            let puzzleImage = PuzzleImage(cgImage)
-            let solvedImages = puzzleImage.divide(times: 9)
-            var puzzle = Puzzle(title: puzzleImage.image, solvedImage: solvedImages)
+            let solvedImages = utility.divide(times: gameSettings.gridColums, image: image!)
+            puzzleList.append(Puzzle(image: image!, solvedImages: solvedImages))
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return gameSettings.getTotalGrid()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! CollectionViewCell
-        cell.puzzleImage.image = UIImage(named: "default")
+        cell.puzzleImage.image = puzzleList[gameNumber].unsolvedImages[indexPath.item]
         
         return cell
     }
@@ -52,9 +54,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        //return UIEdgeInsets(top: 40, left: 10, bottom: 40, right: 10)
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
@@ -62,7 +65,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         let collectionViewWidth = collectionView.bounds.width
         var customCollectionWidth: CGFloat!
         
-        customCollectionWidth = 125
+        customCollectionWidth = self.gameSettings.getsquareWidth()
         
         return CGSize(width: customCollectionWidth, height: customCollectionWidth)
     }

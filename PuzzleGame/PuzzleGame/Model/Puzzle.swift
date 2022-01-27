@@ -10,13 +10,13 @@ import UIKit
 
 class Puzzle {
     
-    var title: CGImage
-    var solvedImage: [CGImage]
-    var unsolvedImage: [CGImage]
+    var image: UIImage
+    var solvedImages: [UIImage]
+    var unsolvedImages: [UIImage]
     
-    init(title: CGImage, solvedImage: [CGImage]){
-        self.title = title
-        self.solvedImage = solvedImage
-        self.unsolvedImage = self.solvedImage.shuffled()
+    init(image: UIImage, solvedImages: [UIImage]) {
+        self.image = image
+        self.solvedImages = solvedImages
+        self.unsolvedImages = self.solvedImages.shuffled()
     }
 }
