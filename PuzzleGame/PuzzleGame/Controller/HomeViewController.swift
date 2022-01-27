@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HomeViewController: UIViewController {
 
     let urlSrtings = URLStrings()
     let utility = Utility()
@@ -38,6 +38,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             puzzleList.append(Puzzle(image: image!, solvedImages: solvedImages))
         }
     }
+}
+
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gameSettings.getTotalGrid()
@@ -50,16 +53,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        print("You selected cell #\(indexPath.item)!")
-    }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
@@ -98,18 +94,15 @@ extension HomeViewController: UICollectionViewDragDelegate {
 extension HomeViewController: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
-        if puzzleList[gameNumber].unsolvedImages == puzzleList[gameNumber].solvedImages {
+        
+        if utility.arrayOfUIImageAreEqual(firstArray: self.puzzleList[gameNumber].unsolvedImages, secondArray: self.puzzleList[gameNumber].solvedImages) {
             Alert.showSolvedPuzzleAlert(on: self)
             collectionView.dragInteractionEnabled = false
-            if gameNumber == puzzleList.count - 1 {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        
         if collectionView.hasActiveDrag {
             return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
@@ -138,7 +131,7 @@ extension HomeViewController: UICollectionViewDropDelegate {
             let sourceIndexPath = item.sourceIndexPath {
             
             collectionView.performBatchUpdates({
-                puzzleList[gameNumber].unsolvedImages.swapAt(sourceIndexPath.item, destinationIndexPath.item)
+                self.puzzleList[gameNumber].unsolvedImages.swapAt(sourceIndexPath.item, destinationIndexPath.item)
                 collectionView.reloadItems(at: [sourceIndexPath,destinationIndexPath])
                 
             }, completion: nil)

@@ -10,6 +10,7 @@ import UIKit
 class Utility {
     
     func divide(times: Int, image: UIImage) -> [UIImage] {
+        
         var tiles: [UIImage] = []
         let ciImage = CIImage(image: image)!
         let cgImage = convertCIImageToCGImage(ciImage)!
@@ -26,10 +27,25 @@ class Utility {
      }
     
     func convertCIImageToCGImage(_ inputImage: CIImage) -> CGImage! {
+        
         let context = CIContext(options: nil)
-        if context != nil {
-            return context.createCGImage(inputImage, from: inputImage.extent)
+        return context.createCGImage(inputImage, from: inputImage.extent)
+    }
+    
+    func arrayOfUIImageAreEqual(firstArray: [UIImage], secondArray: [UIImage]) -> Bool {
+        
+        if firstArray.count != secondArray.count {
+            
+            return false
         }
-        return nil
+        
+        for index in 0..<firstArray.count {
+            
+            if firstArray[index].pngData() != secondArray[index].pngData(){
+                return false
+            }
+        }
+        
+        return true
     }
 }
