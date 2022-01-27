@@ -30,7 +30,10 @@
                                 <rect key="frame" x="97" y="662" width="221" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Reset"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Get Hint"/>
+                                <connections>
+                                    <action selector="puzzleHint:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oOg-2h-oa8"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Otu-0C-kle">
                                 <rect key="frame" x="20" y="117" width="375" height="375"/>
@@ -72,6 +75,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Otu-0C-kle" id="fdY-aJ-GFE"/>
+                        <outlet property="puzzleHintButton" destination="Twe-4Y-col" id="k0M-Xs-fjC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

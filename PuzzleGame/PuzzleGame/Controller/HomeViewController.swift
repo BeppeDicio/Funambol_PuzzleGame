@@ -12,8 +12,10 @@ class HomeViewController: UIViewController {
     let urlSrtings = URLStrings()
     let utility = Utility()
     var puzzleList = [Puzzle]()
+    var hintImage = UIImageView()
     let gameSettings = GameSettings()
     var gameNumber = 0
+    var gameTimer: Timer?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -37,12 +39,33 @@ class HomeViewController: UIViewController {
             let solvedImages = utility.divide(times: gameSettings.gridColums, image: image!)
             puzzleList.append(Puzzle(image: image!, solvedImages: solvedImages))
         }
+        
+        puzzleHintButton.isEnabled = true
     }
     
     @IBAction func newRandomPuzzle(_ sender: UIButton) {
         addNewPuzzle()
         gameNumber += 1
         collectionView.reloadData()
+    }
+    
+    @IBOutlet weak var puzzleHintButton: UIButton!
+    @IBAction func puzzleHint(_ sender: UIButton) {
+        hintImage.image = self.puzzleList[gameNumber].image
+        hintImage.backgroundColor = .white
+        hintImage.contentMode = .scaleAspectFit
+        hintImage.frame = self.view.frame
+        self.view.addSubview(hintImage)
+        self.collectionView.isHidden = true
+        self.view.bringSubviewToFront(hintImage)
+        gameTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(removeHintImage), userInfo: nil, repeats: false)
+    }
+    
+    @objc func removeHintImage() {
+        self.view.sendSubviewToBack(hintImage)
+        self.collectionView.isHidden = false
+        self.hintImage.removeFromSuperview()
+        puzzleHintButton.isEnabled = false
     }
 }
 
