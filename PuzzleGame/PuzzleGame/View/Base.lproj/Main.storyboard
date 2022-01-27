@@ -22,6 +22,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="New puzzle"/>
+                                <connections>
+                                    <action selector="newRandomPuzzle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ckP-Nh-4yi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twe-4Y-col">
                                 <rect key="frame" x="97" y="662" width="221" height="31"/>

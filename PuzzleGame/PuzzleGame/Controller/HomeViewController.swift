@@ -38,6 +38,12 @@ class HomeViewController: UIViewController {
             puzzleList.append(Puzzle(image: image!, solvedImages: solvedImages))
         }
     }
+    
+    @IBAction func newRandomPuzzle(_ sender: UIButton) {
+        addNewPuzzle()
+        gameNumber += 1
+        collectionView.reloadData()
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
