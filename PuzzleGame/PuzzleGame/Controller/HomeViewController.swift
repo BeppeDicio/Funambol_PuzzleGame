@@ -20,6 +20,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Collection view settings
+        collectionView.dragInteractionEnabled = true
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+        
         addNewPuzzle()
     }
     
@@ -76,5 +81,69 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension HomeViewController: UICollectionViewDragDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let item = self.puzzleList[gameNumber].unsolvedImages[indexPath.item]
+        let itemProvider = NSItemProvider(object: item as UIImage)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = dragItem
+        return [dragItem]
+    }
+}
+
+extension HomeViewController: UICollectionViewDropDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
+        if puzzleList[gameNumber].unsolvedImages == puzzleList[gameNumber].solvedImages {
+            Alert.showSolvedPuzzleAlert(on: self)
+            collectionView.dragInteractionEnabled = false
+            if gameNumber == puzzleList.count - 1 {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            } else {
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        if collectionView.hasActiveDrag {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UICollectionViewDropProposal(operation: .forbidden)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        
+        var destinationIndexPath: IndexPath
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let row = collectionView.numberOfItems(inSection: 0)
+            destinationIndexPath = IndexPath(item: row - 1, section: 0)
+        }
+        
+        if coordinator.proposal.operation == .move {
+            self.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
+            self.collectionView.reloadData()
+        }
+    }
+    
+    fileprivate func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath:IndexPath, collectionView: UICollectionView) {
+        
+        if let item = coordinator.items.first,
+            let sourceIndexPath = item.sourceIndexPath {
+            
+            collectionView.performBatchUpdates({
+                puzzleList[gameNumber].unsolvedImages.swapAt(sourceIndexPath.item, destinationIndexPath.item)
+                collectionView.reloadItems(at: [sourceIndexPath,destinationIndexPath])
+                
+            }, completion: nil)
+            
+            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+        }
     }
 }
