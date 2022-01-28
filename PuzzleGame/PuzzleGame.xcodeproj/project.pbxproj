@@ -20,7 +20,6 @@
 		D98D8759279B051C002FFCEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D98D8757279B051C002FFCEC /* Main.storyboard */; };
 		D98D875B279B051E002FFCEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D98D875A279B051E002FFCEC /* Assets.xcassets */; };
 		D98D875E279B051E002FFCEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D98D875C279B051E002FFCEC /* LaunchScreen.storyboard */; };
-		D98D8769279B051E002FFCEC /* PuzzleGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8768279B051E002FFCEC /* PuzzleGameTests.swift */; };
 		D98D8773279B051E002FFCEC /* PuzzleGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8772279B051E002FFCEC /* PuzzleGameUITests.swift */; };
 		D98D8775279B051E002FFCEC /* PuzzleGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98D8774279B051E002FFCEC /* PuzzleGameUITestsLaunchTests.swift */; };
 		D9FECE11279B347600603AFE /* URLStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FECE10279B347600603AFE /* URLStrings.swift */; };
@@ -60,7 +59,6 @@
 		D98D875D279B051E002FFCEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D98D875F279B051E002FFCEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D98D8764279B051E002FFCEC /* PuzzleGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuzzleGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D98D8768279B051E002FFCEC /* PuzzleGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameTests.swift; sourceTree = "<group>"; };
 		D98D876E279B051E002FFCEC /* PuzzleGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuzzleGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98D8772279B051E002FFCEC /* PuzzleGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameUITests.swift; sourceTree = "<group>"; };
 		D98D8774279B051E002FFCEC /* PuzzleGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -115,9 +113,9 @@
 		D98D8750279B051C002FFCEC /* PuzzleGame */ = {
 			isa = PBXGroup;
 			children = (
-				D9FECE0D279B2FF600603AFE /* Controller */,
-				D9FECE0C279B2FF000603AFE /* View */,
 				D9FECE0B279B2FE900603AFE /* Model */,
+				D9FECE0C279B2FF000603AFE /* View */,
+				D9FECE0D279B2FF600603AFE /* Controller */,
 				D98D875F279B051E002FFCEC /* Info.plist */,
 				D98D875A279B051E002FFCEC /* Assets.xcassets */,
 				D98D8751279B051C002FFCEC /* AppDelegate.swift */,
@@ -129,7 +127,6 @@
 		D98D8767279B051E002FFCEC /* PuzzleGameTests */ = {
 			isa = PBXGroup;
 			children = (
-				D98D8768279B051E002FFCEC /* PuzzleGameTests.swift */,
 				D986AE5627A3034900FFBFB4 /* UtilityTests.swift */,
 			);
 			path = PuzzleGameTests;
@@ -324,7 +321,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D986AE5727A3034900FFBFB4 /* UtilityTests.swift in Sources */,
-				D98D8769279B051E002FFCEC /* PuzzleGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
