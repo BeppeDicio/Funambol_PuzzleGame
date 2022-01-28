@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     var gameNumber = 0
     var gameTimer: Timer?
     
-    let imagePicker = UIImagePickerController()
+    var imagePicker: ImagePicker!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -29,8 +29,9 @@ class HomeViewController: UIViewController {
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
         
-        imagePicker.delegate = self
-        
+        // ImagePicker
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+
         addNewPuzzle()
     }
     
@@ -81,10 +82,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func newPuzzleFromLibrary(_ sender: UIButton) {
-        
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
-        present(imagePicker, animated: true, completion: nil)
+        self.imagePicker.present(from: sender)
     }
     
     @objc func removeHintImage() {
@@ -92,18 +90,6 @@ class HomeViewController: UIViewController {
         self.collectionView.isHidden = false
         self.hintImage.removeFromSuperview()
         puzzleHintButton.isEnabled = false
-    }
-}
-
-// PickerController
-extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage {
-            addNewPuzzle(image: image)
-        }
-        
-        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -120,6 +106,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.puzzleImage.image = puzzleList[gameNumber].unsolvedImages[indexPath.item]
         
         return cell
+    }
+}
+
+// ImagePicker Action
+extension HomeViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        if image != nil {
+            self.addNewPuzzle(image: image!)
+        }
     }
 }
 
