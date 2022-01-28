@@ -95,6 +95,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+// PickerController
 extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -106,6 +107,7 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
+// CollectionView
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
