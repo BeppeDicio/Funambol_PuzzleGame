@@ -33,6 +33,15 @@ class HomeViewController: UIViewController {
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 
         addNewPuzzle()
+        
+        // TODO: Block puzzle tails that are in the right position
+        // This feature is possible if you make a check before swapping the tail
+        // into the swap method of the CollectionView.
+        
+        // TODO: Graphic update of the puzzle done situation, with some animation or other effects
+        // To respect the deadline I have implemented the easyest way, an alert modal. It can be increased
+        
+        // TODO: It can be a good feature to add a timer where you give the player a max time for do the puzzle
     }
     
     func addNewPuzzle(){
